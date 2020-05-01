@@ -7,11 +7,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+// Imports all DB Entities
+import com.store.backend.DBConnections.Account.*;
+import com.store.backend.DBConnections.CardInfo.*;
+import com.store.backend.DBConnections.ItemCategories.*;
+import com.store.backend.DBConnections.Items.*;
+import com.store.backend.DBConnections.Orders.*;
+import com.store.backend.DBConnections.*;
+
 @RestController
 public class MainController {
 
     @Autowired
     private AccountRepo accountRepo;
+
+    @Autowired
+    private CardInfoRepo cardRepo;
+
+    @Autowired
+    private ItemCatRepo itemCatRepo;
+
+    @Autowired
+    private ItemsRepo itemRepo;
+
+    @Autowired
+    private OrdersRepo orderRepo;
+
+    @Autowired
+    private BelongsRepo belongRepo;
+
+    @Autowired
+    private ContainsRepo containRepo;
+
+    @Autowired
+    private HoldsRepo holdRepo;
+
+    @Autowired
+    private MakeRepo makeRepo;
+
 
     @GetMapping("/users")
     public Iterable<Account> getAllAccounts() {
