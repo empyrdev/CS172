@@ -26,7 +26,7 @@ function Categories(props) {
           <ListGroupItem key={index}>
             <div style={{ display: "inline-block", width: "90%" }}>
               <div style={{ float: "center" }}>
-                <img src={require("./storefrontImages/categories/" +
+                <img src={require("./Images/categories/" +
                   item.categoryName.toLowerCase() + ".png")}
                 alt={item.categoryName}
                 height="200"

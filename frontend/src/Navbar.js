@@ -91,7 +91,7 @@ function Navigation(props) {
     <Navbar style={{ backgroundColor: "#3d1a1a" }} dark={true} expand="sm">
       <Container>
         <NavbarBrand href="/">
-          StoreFront
+          Store
         </NavbarBrand>
         <Collapse isOpen={isOpen} navbar={true}>
           <Nav className="mr-auto" navbar>

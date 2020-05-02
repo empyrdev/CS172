@@ -46,7 +46,7 @@ function ProfileViewPage(props) {
         <div className="col-md-6">
           <div className="profile-img">
             <img 
-              src={require("./storefrontImages/Network-Profile.png")} 
+              src={require("./Images/Network-Profile.png")} 
               alt={"profile"} />
           </div>
         </div>

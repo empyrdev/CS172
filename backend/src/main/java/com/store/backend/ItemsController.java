@@ -32,6 +32,15 @@ public class ItemsController {
         return itemCatRepo.findAll();
     }
 
+    @GetMapping("/category/add")
+    public ItemCat addCategory(
+    @RequestParam String categoryName){
+        ItemCat itemCat = new ItemCat(categoryName);
+        itemCatRepo.save(itemCat);
+
+        return itemCat;
+    }
+
     @GetMapping("/category")
     public List<Integer> getCategoriesLike(
     @RequestParam String categoryName){

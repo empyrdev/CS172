@@ -62,7 +62,7 @@ function HistoryPage(props) {
                   <div key={myIndex} className="orderWrapper">
                     <div className="orderColumn">
                       <img
-                        src={require(`./storefrontImages/${myItem.image}`)}
+                        src={require(`./Images/${myItem.image}`)}
                         alt={`${myItem.itemName}`}
                         style={{ width: "10rem" }} />
                     </div>

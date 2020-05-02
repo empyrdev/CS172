@@ -8,7 +8,7 @@ function Item(props) {
   let renderedImage = "https://upload.wikimedia.org/" +
     "wikipedia/commons/a/ac/No_image_available.svg";
   try {
-    renderedImage = require(`./storefrontImages/${image}`);
+    renderedImage = require(`./Images/${image}`);
   } catch (error) { }
 
   return (
