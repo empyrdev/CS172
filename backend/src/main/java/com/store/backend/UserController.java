@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.store.backend.DBConnections.Account.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3001")
 public class UserController {
 
     @Autowired
@@ -46,6 +48,20 @@ public class UserController {
         return account;
     }
 
+    @GetMapping("/users/session")
+    public Account checkSession(@RequestParam String id){
+        Account account = accountRepo.findBySessionId(id);
+
+        return account;
+    }
+
+    @GetMapping("/users/emailcheck")
+    public Account getByEmail(@RequestParam String email){
+        Account account = accountRepo.findByEmail(email).get();
+
+        return account;
+    }
+
     @GetMapping("/users/update")
     public Account updateAccount(
     @RequestParam String email, 
@@ -53,9 +69,9 @@ public class UserController {
     @RequestParam String name,
     @RequestParam String cell,
     @RequestParam String address,
-    @RequestParam Integer accountid
+    @RequestParam Integer accountID
     ){
-        Optional<Account> getAccount = accountRepo.findById(accountid);
+        Optional<Account> getAccount = accountRepo.findById(accountID);
         Account account;
 
         try{
@@ -76,19 +92,29 @@ public class UserController {
     }
 
     @GetMapping("/users/add")
-    public Optional<Account> addUser(
+    public Map<String, String> addUser(
     @RequestParam String email, 
     @RequestParam String password,
     @RequestParam String name,
     @RequestParam String cell,
     @RequestParam String address
     ){
-        
-        Account newAccount = new Account(email, password, name, cell, address);
+        Map<String, String> map = new HashMap<>();
+        try{
+            Account account = accountRepo.findByEmail(email).get();
 
-        accountRepo.save(newAccount);
-        
-        return accountRepo.findById(newAccount.getAccountId());
+            map.put("accountID", "Email already exists");
+            
+            return map;
+        }catch (NoSuchElementException e){
+            Account newAccount = new Account(email, password, name, cell, address);
+    
+            accountRepo.save(newAccount);
+            
+            map.put("accountID", "" + newAccount.getAccountId());
+
+            return map;
+        }
     }
 
     @GetMapping("/users/login")
@@ -102,6 +128,8 @@ public class UserController {
 
             UUID session_id = generateUUID(account.getAccountId());
             account.setSessionId(session_id.toString());
+
+            accountRepo.save(account);
 
             map.put("accountID", Integer.toString(account.getAccountId()));
             map.put("sessionID", session_id.toString());

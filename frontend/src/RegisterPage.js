@@ -60,7 +60,7 @@ class RegisterPage extends Component {
     // if everything is correct on the form
     if (formValid(this.state)) {
 
-      fetch("http://localhost:4000/users/add?email=" + this.state.email +
+      fetch("http://localhost:8080/users/add?email=" + this.state.email +
         "&password=" + this.state.password + "&cell=" + this.state.phoneNumber
         + "&address=" + this.state.address + "&name=" + this.state.fullName)
         .then(response => response.json())

@@ -32,7 +32,7 @@ function Navigation(props) {
     if (props.authed) {
       let response = await getUser({ accountID: accountID });
       if (response.errno !== 1054) {
-        setEmail(response[0].email);
+        setEmail(response.email);
       }
     }
   }

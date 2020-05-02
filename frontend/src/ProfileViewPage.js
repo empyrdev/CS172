@@ -22,7 +22,6 @@ function ProfileViewPage(props) {
      
   async function getUserInfo() {
     let tempUserInfo = await getUser({ accountID: cookie.accountID });
-    tempUserInfo = tempUserInfo[0];
     setFullName(tempUserInfo.name);
     setEmail(tempUserInfo.email);
     setPhone(tempUserInfo.cell);
@@ -32,7 +31,7 @@ function ProfileViewPage(props) {
 
   async function getUserOrderHistory() {
     let numberOfOrders = await getNumberOfOrders(cookie.accountID);
-    setNumOfOrders(numberOfOrders[0].counting);
+    setNumOfOrders(numberOfOrders.count);
   }
 
   

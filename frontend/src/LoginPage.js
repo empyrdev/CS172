@@ -60,6 +60,7 @@ class LoginPage extends Component {
         .then(response => {
           //console.log(response);
           //if fetching and got back valid result
+          console.log(response);
           if (response.length > 0) {
             this.setState({ accountID: response[0].accountID, invalid: false },
               () => {
@@ -73,7 +74,7 @@ class LoginPage extends Component {
                 // if valid login, go to next page
                 if (!this.state.invalid){
                   setCookie(sessionInfo, this.state.email, {path: "/"});
-                  this.props.history.push("home");
+                  // this.props.history.push("home");
                 }
               });
           }

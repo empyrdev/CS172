@@ -1,6 +1,6 @@
 // Remember to change localhost to the EC2 server
 
-const url = "localhost:4000";
+const url = "localhost:8080";
 
 export function roundToTwo(num) {
   let result = parseFloat(num);

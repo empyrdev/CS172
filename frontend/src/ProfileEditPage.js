@@ -5,8 +5,6 @@ import { useCookies } from "react-cookie";
 import "./ProfilePage.css";
 import "./PaymentPage.css";
 
-var md5 = require("md5");
-
 function ProfileEditPage(props) {
   const [cookie] = useCookies(["name"]);
 
@@ -38,7 +36,6 @@ function ProfileEditPage(props) {
      
   async function getUserInfo() {
     let tempUserInfo = await getUser({ accountID: cookie.accountID });
-    tempUserInfo = tempUserInfo[0];
     setFullName(tempUserInfo.name);
     setEmail(tempUserInfo.email);
     setPhone(tempUserInfo.cell);
@@ -52,7 +49,7 @@ function ProfileEditPage(props) {
 
   async function getUserOrderHistory() {
     let numberOfOrders = await getNumberOfOrders(cookie.accountID);
-    setNumOfOrders(numberOfOrders[0].counting);
+    setNumOfOrders(numberOfOrders.count);
   }
 
   function handleEdit() {
@@ -104,13 +101,13 @@ function ProfileEditPage(props) {
       // or the change does not cause any conflicts
 
       // check if confirm password is the same with current password
-      if (md5(inputPassword) === databasePassword) {
+      if (inputPassword === databasePassword) {
 
         // check if user want to change their password
         if (newPassword !== "") {
           let userData = { accountID: cookie.accountID, email: email, 
             cell: phone, address: address, name: fullName,
-            password: md5(newPassword) };
+            password: (newPassword) };
             
           updateUser(userData);
         }

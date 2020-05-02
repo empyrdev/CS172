@@ -19,7 +19,7 @@ function App() {
 
   async function checkSession(){
     var results = await checkSessionID(cookies.sessionID);
-    if(results.length > 0){
+    if(results.sessionId === cookies.sessionID){
       setAuthenticated(true);
       setIsAuthenticating(false);
     } else{

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import com.store.backend.DBConnections.Items.*;
 import com.store.backend.DBConnections.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3001")
 public class ItemsController {
 
     @Autowired
