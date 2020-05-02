@@ -10,17 +10,60 @@ import javax.persistence.Table;
 @Table(name="Account")
 public class Account {
 
-  private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer account_id;
+  private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer accountId;
   private String email;
   private String password;
+  private String name;
+  private String cell;
+  private String address;
+  private String sessionId;
 
-  public Account(String email, String password) {
+  public Account(){
+
+  }
+
+  public Account(String email, String password, String name, String cell, String address) {
     this.email = email;
     this.password = password;
+    this.name = name;
+    this.cell = cell;
+    this.address = address;
+  }
+
+  public String getSessionId(){
+    return this.sessionId;
+  }
+
+  public void setSessionId(String sessionId){
+    this.sessionId = sessionId;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getCell() {
+    return this.cell;
+  }
+
+  public void setCell(String cell) {
+    this.cell = cell;
+  }
+
+  public String getAddress() {
+    return this.address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
   }
 
   public Integer getAccountId() {
-    return this.account_id;
+    return this.accountId;
   }
 
   public String getEmail() {

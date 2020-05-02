@@ -3,38 +3,43 @@ package com.store.backend.DBConnections;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-
 import com.store.backend.DBConnections.CardInfo.*;
 import com.store.backend.DBConnections.Account.*;
 
 @Entity
-@IdClass(Holds.class)
 public class Holds implements Serializable{
     
-    private @Id Integer card_id;
-    private @Id Integer account_id;
+    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer id;
+
+    private Integer cardId;
+    private Integer accountId;
+
+    public Holds(){
+        
+    }
 
     public Holds(CardInfo card, Account account){
-        this.card_id = card.getCardID();
-        this.account_id = account.getAccountId();
+        this.cardId = card.getCardID();
+        this.accountId = account.getAccountId();
     }
 
     public Integer getAccountId() {
-        return this.account_id;
+        return this.accountId;
     }
 
-    public void setAccountId(Integer account_id) {
-        this.account_id = account_id;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     public Integer getCardId() {
-        return this.card_id;
+        return this.cardId;
     }
 
-    public void setCardId(Integer card_id) {
-        this.card_id = card_id;
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
     }
 
 }

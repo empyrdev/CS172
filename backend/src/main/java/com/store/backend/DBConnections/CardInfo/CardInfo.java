@@ -10,22 +10,45 @@ import javax.persistence.Table;
 @Table(name="CardInfo")
 public class CardInfo {
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer card_id;
+    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer cardId;
     private String cardHolder;
     private String code;
     private String zip;
     private String number;
+    private String expMonth;
+    private String expYear;
 
+    public CardInfo(){
+        
+    }
 
-    public CardInfo(String cardHolder, String code, String zip, String number) {
+    public CardInfo(String cardHolder, String code, String zip, String number, String expMonth, String expYear) {
         this.cardHolder = cardHolder;
         this.code = code;
         this.zip = zip;
         this.number = number;
+        this.expMonth = expMonth;
+        this.expYear = expYear;
+    }
+
+    public String getExpMonth(){
+        return this.expMonth;
+    }
+
+    public void setExpMonth(String expMonth){
+        this.expMonth = expMonth;
+    }
+
+    public String getExpYear(){
+        return this.expYear;
+    }
+
+    public void setExpYear(String expYear){
+        this.expYear = expYear;
     }
 
     public Integer getCardID(){
-        return this.card_id;
+        return this.cardId;
     }
     
     public String getCardHolder() {
@@ -59,5 +82,6 @@ public class CardInfo {
     public void setNumber(String number) {
         this.number = number;
     }
+
 
 }

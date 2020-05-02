@@ -10,17 +10,25 @@ import javax.persistence.Table;
 @Table(name="Items")
 public class Items {
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer item_id;
+    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer itemId;
     private Double price;
     private String name;
+    private String description;
+    private String image;
 
-    public Items(Double price, String name) {
-        this.price = price;
-        this.name = name;
+    public Items(){
+        
     }
 
-    public Integer getItemId() {
-        return this.item_id;
+    public Items(Double price, String name, String description, String image) {
+        this.price = price;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+    }
+
+    public Integer getItemId(){
+        return this.itemId;
     }
 
     public Double getPrice() {
@@ -39,5 +47,20 @@ public class Items {
         this.name = name;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return this.image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
     
 }

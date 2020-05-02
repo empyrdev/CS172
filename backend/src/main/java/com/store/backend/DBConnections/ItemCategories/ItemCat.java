@@ -10,15 +10,19 @@ import javax.persistence.Table;
 @Table(name="ItemCategories")
 public class ItemCat {
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer category_id;
+    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer categoryId;
     private String categoryName;
+
+    public ItemCat(){
+        
+    }
 
     public ItemCat(String categoryName) {
         this.categoryName = categoryName;
     }
 
     public Integer getCategoryId() {
-        return this.category_id;
+        return this.categoryId;
     }
     
     public String getCategoryName() {

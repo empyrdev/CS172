@@ -3,38 +3,54 @@ package com.store.backend.DBConnections;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 
 import com.store.backend.DBConnections.Items.*;
 import com.store.backend.DBConnections.Orders.*;
 
 @Entity
-@IdClass(Contains.class)
 public class Contains implements Serializable {
     
-    private @Id Integer item_id;
-    private @Id Integer order_id;
+    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer id;
 
-    public Contains(Items item, Orders order){
-        this.item_id = item.getItemId();
-        this.order_id = order.getOrderId();
+    private Integer itemId;
+    private Integer orderId;
+    private Integer quantity;
+
+    public Contains(){
+
     }
 
-    public Integer getItem_id() {
-        return this.item_id;
+    public Contains(Items item, Orders order, Integer quantity){
+        this.itemId = item.getItemId();
+        this.orderId = order.getOrderId();
+        this.quantity = quantity;
     }
 
-    public void setItem_id(Integer item_id) {
-        this.item_id = item_id;
+    public Integer getQuantity() {
+        return this.quantity;
     }
 
-    public Integer getOrder_id() {
-        return this.order_id;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public Integer getItemId() {
+        return this.itemId;
+    }
+
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
+
+    public Integer getOrderId() {
+        return this.orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
 }
