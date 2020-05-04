@@ -75,12 +75,12 @@ public class CardsController {
     @GetMapping("/cards/remove")
     public Map<String, String> removeCard(
     @RequestParam Integer id,
-    @RequestParam Integer cardId
+    @RequestParam Integer cardID
     ){
         Map<String, String> newMap = new HashMap<>();
         try{
-            Holds delHolds = holdRepo.findByAccountIdAndCardId(id, cardId).get();
-            CardInfo delCard = cardRepo.findById(cardId).get();
+            Holds delHolds = holdRepo.findByAccountIdAndCardId(id, cardID).get();
+            CardInfo delCard = cardRepo.findById(cardID).get();
 
             holdRepo.delete(delHolds);
             cardRepo.delete(delCard);

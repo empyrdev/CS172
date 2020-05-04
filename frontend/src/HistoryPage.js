@@ -21,13 +21,14 @@ function HistoryPage(props) {
     let tempOrderList = await getOrders(cookie.accountID, "");
     setOrderList(tempOrderList);
 
+    console.log(tempOrderList);
     // eslint-disable-next-line
     tempOrderList.map((entry) => {
-      const { orderID, itemPrice, itemId, quantity } = entry;
+      const { orderID, itemPrice, itemId, quantity, price } = entry;
       if (!hashMap[orderID])
         hashMap[orderID] = { items: [], total: 0 };
       hashMap[orderID].items.push({ itemId, quantity, itemPrice });
-      hashMap[orderID].total += itemPrice;
+      hashMap[orderID].total = price;
     });
 
     let keys = [];
