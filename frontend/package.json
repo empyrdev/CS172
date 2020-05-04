@@ -44,7 +44,7 @@
     "@babel/node": "^7.6.2",
     "eslint": "^6.6.0"
   },
-  "description": "This directory contains all of the application code for the StoreFront application. The application connects with the business tier hosted on Amazon Web Services. The code for the business logic tier is found in the `storefrontServer` directory. It handles adding, deleting, updating and fetching data from our SQL database.",
+  "description": "This directory contains all of the application code for the store application. The application connects with the business tier hosted on Amazon Web Services. The code for the business logic tier is found in the `backend` directory. It handles adding, deleting, updating and fetching data from our SQL database.",
   "main": "index.js",
   "author": "",
   "license": "ISC"
