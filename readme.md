@@ -8,6 +8,26 @@
 - Alexander Len
 - Jeffrey Wu
 
+## Table of contents
+- [San Jose State University](#san-jose-state-university)
+- [Enterprise Software - CMPE172/Spring2020](#enterprise-software---cmpe172spring2020)
+  - [Team Members](#team-members)
+  - [Table of contents](#table-of-contents)
+  - [Project Introduction](#project-introduction)
+  - [Sample Demo Screenshots](#sample-demo-screenshots)
+  - [Requirements](#requirements)
+  - [Setup](#setup)
+    - [Setup for Frontend](#setup-for-frontend)
+      - [Additional Setup](#additional-setup)
+    - [Setup for Backend](#setup-for-backend)
+  - [UML Diagram](#uml-diagram)
+  - [Database Schema](#database-schema)
+    - [Primary tables](#primary-tables)
+    - [Relation Tables](#relation-tables)
+  - [Database Queries](#database-queries)
+  - [Mid tier APIs](#mid-tier-apis)
+  - [UI Data Transport](#ui-data-transport)
+
 ## Project Introduction
 
 The project is a normal store front where a user can purchase products on their account, save card information, and keeps track of user history as well as the most popular items on the store. The program runs using Docker with ReactJS on the frontend, in the backend is Spring boot with a java based backend, and then the database is an AWS RDS running MySQL.
