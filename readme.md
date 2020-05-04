@@ -97,7 +97,8 @@ docker run -it --rm -v ${pwd}:/app -v /app/node_modules -p 3001:3000 sample:dev
 
 ## UML Diagram
 
-
+![](https://i.imgur.com/dQYK6Xo.png)
+![](https://i.imgur.com/KDGWrBu.png)
 
 ## Database Schema
 
