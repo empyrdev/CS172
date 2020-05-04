@@ -13,10 +13,14 @@ import com.store.backend.DBConnections.Orders.*;
 @Entity
 public class Make implements Serializable {
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer id;
 
     private Integer accountId;
     private Integer orderId;
+
+    public Make(){
+
+    }
 
     public Make(Account account, Orders order){
         this.accountId = account.getAccountId();

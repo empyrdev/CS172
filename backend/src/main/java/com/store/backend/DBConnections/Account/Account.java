@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name="Account")
 public class Account {
 
-  private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer accountId;
+  private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer accountId;
   private String email;
   private String password;
   private String name;

@@ -42,9 +42,9 @@ class CartPage extends React.Component {
   }
 
   handleAdd = async (item) => {
-    await addToCart(this.state.cookies.get("accountID"), item.itemID, 1);
+    await addToCart(this.state.cookies.get("accountID"), item.itemId, 1);
     let tempItems = this.state.cartItems;
-    tempItems.find((x) => x.itemID === item.itemID).quantity += 1;
+    tempItems.find((x) => x.itemId === item.itemId).quantity += 1;
     this.setState({
       cartItems: tempItems,
       total: parseFloat(parseFloat(this.state.total) + item.price)
@@ -53,13 +53,13 @@ class CartPage extends React.Component {
   }
 
   handleRemove = async (item) => {
-    await removeFromCart(this.state.cookies.get("accountID"), item.itemID, 1);
+    await removeFromCart(this.state.cookies.get("accountID"), item.itemId, 1);
     let tempItems = this.state.cartItems;
     if (item.quantity === 1) {
-      tempItems = tempItems.filter((x) => x.itemID !== item.itemID);
+      tempItems = tempItems.filter((x) => x.itemId !== item.itemId);
     } else {
       tempItems.find((x) => {
-        if (x.itemID === item.itemID)
+        if (x.itemId === item.itemId)
           x.quantity -= 1;
         return true;
       });

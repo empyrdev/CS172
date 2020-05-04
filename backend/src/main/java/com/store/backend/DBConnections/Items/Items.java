@@ -10,11 +10,12 @@ import javax.persistence.Table;
 @Table(name="Items")
 public class Items {
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer itemId;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer itemId;
     private Double price;
     private String name;
     private String description;
     private String image;
+    private Integer purchased;
 
     public Items(){
         
@@ -25,6 +26,15 @@ public class Items {
         this.name = name;
         this.description = description;
         this.image = image;
+        this.purchased = 0;
+    }
+
+    public Integer getPurchased() {
+        return this.purchased;
+    }
+
+    public void addPurchased(Integer purchased){
+        this.purchased += purchased;
     }
 
     public Integer getItemId(){

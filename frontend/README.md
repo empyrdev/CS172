@@ -17,4 +17,4 @@ After the image is done building, run the command:
 docker run -it --rm -v ${pwd}:/app -v /app/node_modules -p 3001:3000 sample:dev
 
 Then you can access the page at
-http://192.168.99.100:3001/
+http://192.168.99.100:3001/ or http://localhost:3001/

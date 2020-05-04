@@ -92,6 +92,12 @@ public class OrdersController {
 
         Double totalPrice = 0.0;
         Orders order = new Orders();
+        orderRepo.save(order);
+        
+
+        if(items.get(items.size()-1).get(0) == 0 && items.get(items.size()-1).get(1) == 0){
+            items = items.subList(0, items.size()-1);
+        } 
 
         for(int i = 0; i < items.size(); i++){
             Integer itemId = items.get(i).get(0);
@@ -102,6 +108,9 @@ public class OrdersController {
 
             totalPrice += item.getPrice() * quantity;
             
+            item.addPurchased(quantity);
+            itemRepo.save(item);
+
             containRepo.save(contains);
         }
 

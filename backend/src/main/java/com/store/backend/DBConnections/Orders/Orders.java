@@ -10,8 +10,7 @@ import javax.persistence.Table;
 @Table(name="Orders")
 public class Orders {
 
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer id;
-    private Integer orderId;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer orderId;
     private Double price;
 
     public Orders(){

@@ -30,8 +30,11 @@ public class ItemsController {
     private BelongsRepo belongRepo;
     
     @GetMapping("/item/categories")
-    public Iterable<ItemCat> getAllCategories(){
-        return itemCatRepo.findAll();
+    public Iterable<ItemCat> getAllCategories(
+    @RequestParam(required = false) Integer categoryID){
+
+        if(categoryID == null) return itemCatRepo.findAll();
+        else return itemCatRepo.findAllByCategoryId(categoryID);
     }
 
     @GetMapping("/category/add")
@@ -44,22 +47,22 @@ public class ItemsController {
     }
 
     @GetMapping("/category")
-    public List<Integer> getCategoriesLike(
+    public Iterable<ItemCat> getCategoriesLike(
     @RequestParam String categoryName){
-        Iterable<ItemCat> categories = itemCatRepo.findByCategoryNameContaining(categoryName);
+        Iterable<ItemCat> categories = itemCatRepo.findAllByCategoryNameContaining(categoryName);
         List<Integer> catId = new ArrayList<>();
 
         for(ItemCat cat : categories){
             catId.add(cat.getCategoryId());
         }
 
-        return catId;
+        return categories;
     }
 
     @GetMapping("/item/search")
     public List<Integer> getItemSearch(
     @RequestParam String itemName){
-        Iterable<Items> items = itemRepo.findByNameContaining(itemName);
+        Iterable<Items> items = itemRepo.findAllByNameContaining(itemName);
         List<Integer> itemId = new ArrayList<>();
 
         for(Items item : items){
@@ -70,8 +73,32 @@ public class ItemsController {
     }
 
     @GetMapping("/i")
-    public Items getItem(@RequestParam Integer itemID){
-        return itemRepo.findById(itemID).get();
+    public List<Items> getItem(@RequestParam(required = false) Integer itemID){
+        List<Items> items = new ArrayList<>();
+
+        if(itemID == null){
+            items = itemRepo.findAll();
+
+            return items;
+        } else{
+            items.add(itemRepo.findById(itemID).get());
+
+            return items;
+        }
+    }
+
+    @GetMapping("/categories/search")
+    public List<Items> getItemInCategory(
+    @RequestParam Integer categoryID
+    ){
+        List<Items> itemIds = new ArrayList<>();
+        Iterable<Belongs> belongs = belongRepo.findAllByCategoryId(categoryID);
+        
+        for(Belongs i : belongs){
+            itemIds.add(itemRepo.findById(i.getItemId()).get());
+        }
+        
+        return itemIds;
     }
 
     @GetMapping("/item")
@@ -130,13 +157,14 @@ public class ItemsController {
 
         ItemCat category = itemCatRepo.findById(categoryID).get();
         Items item = new Items(price, name, description, image);
-        Belongs belong = new Belongs(category, item);
-
         itemRepo.save(item);
+        
+        Belongs belong = new Belongs(category, item);
         belongRepo.save(belong);
 
         Map<String,String> map = new HashMap<>();
         map.put("result", "success");
+        map.put("itemId", "" + item.getItemId());
         return map;
     }
 

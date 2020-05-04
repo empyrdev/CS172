@@ -12,18 +12,15 @@ function CartModal(props) {
   const [cookies] = useCookies(["name"]);
   const { accountID } = cookies;
 
-  const { price, itemName, quantity, itemID } = props.item;
+  const { price, itemName, quantity, itemId } = props.item;
 
   function addItemToCart() {
-    if(quantity !== 0) {
-      addToCart(accountID, itemID, count);
-    }
+    addToCart(accountID, itemId, count);
     props.toggle();
   }
 
   function handleAdd() {
-    if (count < quantity)
-      setCount(count + 1);
+    setCount(count + 1);
   }
 
   function handleRemove() {
@@ -33,6 +30,7 @@ function CartModal(props) {
 
   function handleChange(e) {
     let value = e.target.value;
+    console.log(value);
     if (value > quantity) {
       setCount(quantity);
     } else if (value < 0) {

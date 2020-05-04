@@ -13,7 +13,7 @@ import com.store.backend.DBConnections.Orders.*;
 @Entity
 public class Contains implements Serializable {
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer id;
 
     private Integer itemId;
     private Integer orderId;

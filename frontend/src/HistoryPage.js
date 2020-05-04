@@ -23,10 +23,10 @@ function HistoryPage(props) {
 
     // eslint-disable-next-line
     tempOrderList.map((entry) => {
-      const { orderID, itemPrice, itemID, quantity } = entry;
+      const { orderID, itemPrice, itemId, quantity } = entry;
       if (!hashMap[orderID])
         hashMap[orderID] = { items: [], total: 0 };
-      hashMap[orderID].items.push({ itemID, quantity, itemPrice });
+      hashMap[orderID].items.push({ itemId, quantity, itemPrice });
       hashMap[orderID].total += itemPrice;
     });
 
@@ -39,8 +39,8 @@ function HistoryPage(props) {
   }
 
   // function inside of component
-  function handleClick(itemID) {
-    props.history.push(`/item/${itemID}`);
+  function handleClick(itemId) {
+    props.history.push(`/item/${itemId}`);
   }
 
   return (
@@ -68,7 +68,7 @@ function HistoryPage(props) {
                     </div>
                     <div className="corderColumn" align="left">
                       <h5>
-                        <button onClick={() => handleClick(myItem.itemID)}>
+                        <button onClick={() => handleClick(myItem.itemId)}>
                           {myItem.itemName}
                         </button>
                       </h5>

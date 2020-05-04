@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name="Cart")
 public class Cart {
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer id;
 
     private Integer accountId;
     private Integer itemId;

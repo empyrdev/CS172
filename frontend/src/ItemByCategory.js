@@ -27,6 +27,7 @@ function ItemByCategory(props) {
 
   async function getItems() {
     setItems(await getCategory(id));
+    console.log(items)
   }
 
   return (

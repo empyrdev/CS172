@@ -93,10 +93,11 @@ function ProfileEditPage(props) {
     // check if there are any conflict in the database based on email
     if (emailTemp !== email) {
       userByEmailList = await userEmailCheck(email);
+      console.log(userByEmailList);
     }
 
     if (formValid(formErrors) && fullName !== "" && phone !== "" && 
-      address !== "" && email !== "" && userByEmailList.length === 0) {
+      address !== "" && email !== "" && userByEmailList.email !== "User already exists") {
       // if in this block, it is sure that the email either is the same 
       // or the change does not cause any conflicts
 

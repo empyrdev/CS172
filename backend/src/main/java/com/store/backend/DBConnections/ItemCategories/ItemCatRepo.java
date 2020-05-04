@@ -6,7 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ItemCatRepo extends CrudRepository<ItemCat, Integer>{
 
-    Iterable<ItemCat> findByCategoryNameContaining(String categoryName);
+    Iterable<ItemCat> findAllByCategoryNameContaining(String categoryName);
     List<ItemCat> findAll();
+    Iterable<ItemCat> findAllByCategoryId(Integer categoryId);
     
 }

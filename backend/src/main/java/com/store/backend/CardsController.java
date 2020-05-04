@@ -47,12 +47,12 @@ public class CardsController {
     @GetMapping("cards/add")
     public CardInfo addCard(
     @RequestParam Integer id,
-    @RequestParam String cardNumber,
+    @RequestParam String CardNumber,
     @RequestParam String cardHolder,
     @RequestParam String cvv,
-    @RequestParam String zip,
-    @RequestParam String expMonth,
-    @RequestParam String expYear
+    @RequestParam String Zip,
+    @RequestParam String ExpMonth,
+    @RequestParam String ExpYear
     ){
         Optional<Account> getAccount = accountRepo.findById(id);
         Account account;
@@ -63,7 +63,7 @@ public class CardsController {
             return null;
         }
         
-        CardInfo newCard = new CardInfo(cardHolder, cvv, zip, cardNumber, expMonth, expYear);
+        CardInfo newCard = new CardInfo(cardHolder, cvv, Zip, CardNumber, ExpMonth, ExpYear);
         Holds newRel = new Holds(newCard, account);
 
         cardRepo.save(newCard);

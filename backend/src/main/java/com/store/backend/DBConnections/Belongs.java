@@ -13,7 +13,7 @@ import com.store.backend.DBConnections.Items.*;
 @Entity
 public class Belongs implements Serializable{
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer id;
 
     private Integer categoryId;
     private Integer itemId;

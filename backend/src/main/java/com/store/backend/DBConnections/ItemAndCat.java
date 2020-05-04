@@ -19,7 +19,7 @@ public class ItemAndCat {
         this.itemName = item.getName();
         this.price = item.getPrice();
         this.description = item.getDescription();
-        this.image = item.getDescription();
+        this.image = item.getImage();
     }
 
     public Integer getCategoryID() {

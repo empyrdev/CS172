@@ -12,7 +12,7 @@ import com.store.backend.DBConnections.Account.*;
 @Entity
 public class Holds implements Serializable{
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Integer id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer id;
 
     private Integer cardId;
     private Integer accountId;

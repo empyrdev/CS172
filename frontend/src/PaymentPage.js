@@ -50,7 +50,6 @@ function PaymentPage(props) {
  
   async function getUserInfo() {
     let tempUserInfo = await getUser({ accountID: cookie.accountID });
-    tempUserInfo = tempUserInfo[0];
     let addressList = tempUserInfo.address.split(",");
     
     setFullname(tempUserInfo.name.toUpperCase());
@@ -63,12 +62,11 @@ function PaymentPage(props) {
 
   async function retrieveCardInfo() {
     let tempList = await getCards({ accountID: cookie.accountID });
-    tempList = tempList.data;
+    
     setCardList(tempList);
   }
 
   async function renderCartItems() {
-    // put user ID here
     let items = await getCartItems(cookie.accountID);
     //console.log(items);
     setCartItems(await getCartItemsByID(items));
@@ -136,10 +134,12 @@ function PaymentPage(props) {
     
 
       // Add new order
-      let orderData = []; // [[itemID, quality], [itemID, quality], ...]
+      // let orderData = []; // [[itemId, quality], [itemId, quality], ...]
+      let orderData = "";
 
       cartItems.forEach(function (item) {
-        orderData.push([item.itemID, item.quantity]);
+        // orderData.push([item.itemId, item.quantity]);
+        orderData = orderData + "&items=" + item.itemId + "," + item.quantity;
       });
 
       addOrders(orderData, cookie.accountID);
@@ -241,13 +241,13 @@ function PaymentPage(props) {
     }
     else {
       for (let index in cardList) {
-        if (cardList[index].CardNumber === e.target.value) {
-          setCardHolderName(cardList[index].CardHolder.toUpperCase());
+        if (cardList[index].cardNumber === e.target.value) {
+          setCardHolderName(cardList[index].cardHolder.toUpperCase());
           setCardNumber("****-****-****-" + 
-                        cardList[index].CardNumber.split("-")[3]);
-          setExpMonth(cardList[index].ExpMonth);
-          setExpYear(cardList[index].ExpYear);
-          setCvv(cardList[index].CVV);
+                        cardList[index].cardNumber.split("-")[3]);
+          setExpMonth(cardList[index].expMonth);
+          setExpYear(cardList[index].expYear);
+          setCvv(cardList[index].code);
 
           formErrors.cardHolderName="";
           formErrors.cardNumber="";
@@ -271,8 +271,8 @@ function PaymentPage(props) {
   };
 
   // function inside of component
-  function handleClickItem(itemID) {
-    props.history.push(`/item/${itemID}`);
+  function handleClickItem(itemId) {
+    props.history.push(`/item/${itemId}`);
   }
 
   function handleClickCart() {
@@ -471,8 +471,8 @@ function PaymentPage(props) {
                     </option>
                     {cardList && cardList.map((item, index) => {
                       return (
-                        <option key={index} value={item.CardNumber}>
-                          {"****-****-****-" + item.CardNumber.split("-")[3]}
+                        <option key={index} value={item.cardNumber}>
+                          {"****-****-****-" + item.cardNumber.split("-")[3]}
                         </option>
                       );
                     })}
@@ -578,7 +578,7 @@ function PaymentPage(props) {
                 <p key={index}>
                   <button 
                     className="button-style" 
-                    onClick={() => handleClickItem(item.itemID)}>
+                    onClick={() => handleClickItem(item.itemId)}>
                     {item.itemName}
                   </button>
                   <span className="price">

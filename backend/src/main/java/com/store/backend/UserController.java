@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,8 +31,10 @@ public class UserController {
     }
 
     @GetMapping("/users/test")
-    public Iterable<Account> getAllAccounts() {
-        return accountRepo.findAll();
+    public List<List<Integer>> testFunction(
+    @RequestParam List<List<Integer>> items
+    ) {
+        return items;
     }
 
     @GetMapping("/users/othertest")
@@ -56,10 +59,17 @@ public class UserController {
     }
 
     @GetMapping("/users/emailcheck")
-    public Account getByEmail(@RequestParam String email){
-        Account account = accountRepo.findByEmail(email).get();
+    public Map<String,String> getByEmail(@RequestParam String email){
+        Map<String, String> map = new HashMap<>();
 
-        return account;
+        try{
+            Account account = accountRepo.findByEmail(email).get();
+
+            map.put("email", "User already exists");
+            return map;
+        }catch (NoSuchElementException e){
+            return map;
+        }
     }
 
     @GetMapping("/users/update")

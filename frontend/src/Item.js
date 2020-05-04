@@ -4,7 +4,7 @@ import { roundToTwo } from "./APIFunctions";
 
 function Item(props) {
   const { itemName, price,
-    description, itemID, image } = props.item;
+    description, itemId, image } = props.item;
   let renderedImage = "https://upload.wikimedia.org/" +
     "wikipedia/commons/a/ac/No_image_available.svg";
   try {
@@ -12,7 +12,7 @@ function Item(props) {
   } catch (error) { }
 
   return (
-    <ListGroupItem key={itemID}>
+    <ListGroupItem key={itemId}>
       <div style={{ display: "inline-block", width: "90%" }}>
         <div style={{ float: "left" }}>
           <Row>

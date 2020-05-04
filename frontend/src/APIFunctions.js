@@ -100,6 +100,7 @@ export async function getCards(user) {
     .then((response) => response.json())
     .then((response) => {
       objects = response;
+      // console.log(objects);
     })
     .catch((err) => {
       console.error(err);
@@ -109,7 +110,7 @@ export async function getCards(user) {
 
 export async function addCard(data) {
   fetch(`http://${url}/cards/add?id=${data.accountID}` +
-    `&cardHolder=${data.cardHolder}&CVV=${data.CVV}` +
+    `&cardHolder=${data.cardHolder}&cvv=${data.CVV}` +
     `&Zip=${data.Zip}&CardNumber=${data.cardNumber}` +
     `&ExpMonth=${data.ExpMonth}&ExpYear=${data.ExpYear}`)
     .catch((err) => {
@@ -140,10 +141,25 @@ export async function getCategory(categoryID) {
   return objects;
 }
 
+export async function getCategoryById(categoryID){
+  let objects = []
+  const query = `http://${url}/categories/search?categoryID=${categoryID}`
+
+  await fetch(`${query}`)
+    .then((response) => response.json())
+    .then((response) => {
+      objects = response;
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  return objects;
+}
+
 export async function getItems(itemID) {
   let objects = [];
-  const query = !itemID ? `http://${url}/item` :
-    `http://${url}/item?itemID=${itemID}`;
+  const query = !itemID ? `http://${url}/i` :
+    `http://${url}/i?itemID=${itemID}`;
   await fetch(`${query}`)
     .then((response) => response.json())
     .then((response) => {
@@ -174,9 +190,9 @@ export async function searchByCategoryName(categoryName) {
   await fetch(`http://${url}/category?categoryName=${categoryName}`)
     .then((response) => response.json())
     .then(async (response) => {
-      response.map(x => categoryIDs.push(x.categoryID));
+      response.map(x => categoryIDs.push(x.categoryId));
       await Promise.all(categoryIDs.map(async (id) => {
-        objects = objects.concat(await getCategory(id));
+        objects = objects.concat(await getCategoryById(id));
       }));
     })
     .catch((err) => {
@@ -188,10 +204,10 @@ export async function searchByCategoryName(categoryName) {
 export async function searchByItemName(itemName) {
   let objects = [];
   let itemIDs = [];
-  await fetch(`http://${url}/item?itemName=${itemName}`)
+  await fetch(`http://${url}/item/search?itemName=${itemName}`)
     .then((response) => response.json())
     .then(async (response) => {
-      response.map(x => itemIDs.push(x.itemID));
+      response.map(x => itemIDs.push(x.itemId));
       await Promise.all(itemIDs.map(async (id) => {
         let currentItem = await getItems(id);
         objects = objects.concat(currentItem);
@@ -236,11 +252,12 @@ export async function getOrders(accountID, orderID) {
   return objects;
 }
 
+// /orders/add?items=1,2&items=3,4
 export async function addOrders(data, accountID) {
-  let dataString = JSON.stringify(data);
-  let fetchString = `http://${url}/orders/add?items=` +
-    dataString + "&accountID=" + accountID;
+  let junkItem = "&items=0,0"
+  let fetchString = `http://${url}/orders/add?accountID=${accountID}${data}${junkItem}`;
 
+  console.log(fetchString)
   fetch(fetchString)
     .catch((err) => {
       console.error(err);
@@ -265,10 +282,10 @@ export async function getNumberOfOrders(accountID) {
 export async function getCartItemsByID(cartItems) {
   let result = [];
   await Promise.all(cartItems.map(async (item) => {
-    let currItem = await getItems(item.itemID);
-    const { itemID, description, image, itemName, price } = currItem[0];
+    let currItem = await getItems(item.itemId);
+    const { itemId, description, image, itemName, price } = currItem[0];
     result.push({
-      itemID, quantity: parseInt(item.quantity),
+      itemId, quantity: parseInt(item.quantity),
       description, image, itemName, price
     });
   }));
