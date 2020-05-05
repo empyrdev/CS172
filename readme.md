@@ -79,12 +79,13 @@ docker run -it --rm -v ${pwd}:/app -v /app/node_modules -p 3001:3000 sample:dev
   - If the page is not accessible at http://localhost:3001/, additional setup is necessary
 
 #### Additional Setup
+- Exit the program on docker
 - Open the folder located at `./backend/src/main/java/com/store/backend`
 - Open all the files that end in "Controller.java"
 - At the top before the class declaration you will see: `@CrossOrigin(origins = "http://localhost:3001")`
   - Change `"http://localhost:3001"` to the IP and Port of where docker launched the application
   - For example: `@CrossOrigin(origins = "http://192.168.99.100:3001/")`
-- After doing this for all 5 Controller files, frontend setup is complete
+- After doing this for all 5 Controller files, restart the initial frontend setup and then frontend setup is complete
 
 ### Setup for Backend
 
