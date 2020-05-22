@@ -7,42 +7,42 @@ import { checkSessionID } from "./APIFunctions";
 import { useCookies } from "react-cookie";
 
 function App() {
-
   const [authenticated, setAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [cookies, removeCookie] = useCookies(["name"]);
 
-  useEffect(() =>{
+  useEffect(() => {
     checkSession();
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
-  async function checkSession(){
+  async function checkSession() {
     var results = await checkSessionID(cookies.sessionID);
-    if(results.sessionId === cookies.sessionID){
+    if (results.sessionId === cookies.sessionID) {
       setAuthenticated(true);
       setIsAuthenticating(false);
-    } else{
+    } else {
       setAuthenticated(false);
     }
 
     setIsAuthenticating(false);
   }
 
-  function logout(){
+  function logout() {
     removeCookie("sessionID");
     removeCookie("accountID");
     setAuthenticated(false);
   }
 
   return (
-    !isAuthenticating &&
-    <div className="App">
-      <BrowserRouter>
-        <Navbar authed={authenticated} handleLogout={logout} />
-        <Routing appProps={{ authenticated, setAuthenticated }} />
-      </BrowserRouter>
-    </div>
+    !isAuthenticating && (
+      <div className="App">
+        <BrowserRouter>
+          <Navbar authed={authenticated} handleLogout={logout} />
+          <Routing appProps={{ authenticated, setAuthenticated }} />
+        </BrowserRouter>
+      </div>
+    )
   );
 }
 
